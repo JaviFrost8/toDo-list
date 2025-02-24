@@ -6,6 +6,9 @@ export const ToDoApp = () => {
   const [text, setText] = useState('')
   const [tasks, setTasks] = useState([])
   const [filter, setFilter] = useState('all')
+  
+  const [editingId, setEditingId] = useState(null)
+  const [editingText, setEditingText] = useState('')
 
   const filteredTask = tasks.filter(task => {
     if(filter === 'completed') return task.completed;
@@ -34,7 +37,27 @@ export const ToDoApp = () => {
       prevTask.filter(task => task.id !== taskId)
     )
   }
-  
+
+  function handleEdit(taskId, text){
+    setEditingId(taskId)
+    setEditingText(text)
+  }
+
+  function handleSave(taskId, newText){
+    setTasks(prevTasks => 
+      prevTasks.map(task => (
+        task.id === taskId ? {...task, text: newText} : task
+      ))
+    )
+
+    setEditingId(null)
+    setEditingText('')
+  }
+
+  function handleCancelEdit(){
+    setEditingId(null)
+    setEditingText('')
+  }
 
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'))
@@ -74,6 +97,10 @@ export const ToDoApp = () => {
             <Task
               key={task.id}
               toggleTaskCompleted={toggleTaskCompleted}
+              handleEdit={() => handleEdit(task.id, task.text)}
+              handleSave={(newText) => handleSave(task.id, newText)}
+              handleCancelEdit={handleCancelEdit}
+              isEditing={editingId === task.id}
               handleDelete={handleDelete}
               task={task}
             />
