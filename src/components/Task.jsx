@@ -16,6 +16,7 @@ export const Task = ({ task, toggleTaskCompleted, handleDelete, handleEdit, hand
     if(e.key === 'Escape') handleCancelEdit()
   }
 
+
   return (
     <div className={`task ${task.completed ? 'taskCompleted' : ''}`}>
       {isEditing ? (
