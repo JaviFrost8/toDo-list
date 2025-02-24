@@ -34,6 +34,7 @@ export const ToDoApp = () => {
       prevTask.filter(task => task.id !== taskId)
     )
   }
+  
 
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'))
