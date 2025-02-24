@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from 'react'
-=======
-import React, { useState } from 'react'
->>>>>>> e853b07c0a04d64e3c1cd8801d27fdde3984a1ea
 
 export const Task = ({ task, toggleTaskCompleted, handleDelete, handleEdit, handleSave, isEditing, handleCancelEdit }) => {
 
   const [localText, setLocalText] = useState(task.text)
-<<<<<<< HEAD
   const inputRef = useRef()
 
   useEffect(() => {
@@ -20,9 +15,6 @@ export const Task = ({ task, toggleTaskCompleted, handleDelete, handleEdit, hand
     if(e.key === 'Enter') handleSave(localText)
     if(e.key === 'Escape') handleCancelEdit()
   }
-=======
->>>>>>> e853b07c0a04d64e3c1cd8801d27fdde3984a1ea
-
 
   return (
     <div className={`task ${task.completed ? 'taskCompleted' : ''}`}>
@@ -30,13 +22,9 @@ export const Task = ({ task, toggleTaskCompleted, handleDelete, handleEdit, hand
         <>
           <input
             type='text'
-<<<<<<< HEAD
             ref={inputRef}
             value={localText}
             onKeyDown={handleKeyDown}
-=======
-            value={localText}
->>>>>>> e853b07c0a04d64e3c1cd8801d27fdde3984a1ea
             onChange={(e) => setLocalText(e.target.value)}
           />
           <button onClick={() => handleSave(localText)}>✅ Guardar</button>
