@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Task } from './Task';
 
 export const ToDoApp = () => {
@@ -9,6 +9,8 @@ export const ToDoApp = () => {
   
   const [editingId, setEditingId] = useState(null)
   const [editingText, setEditingText] = useState('')
+
+  const inputRef = useRef()
 
   const filteredTask = tasks.filter(task => {
     if(filter === 'completed') return task.completed;
@@ -59,6 +61,10 @@ export const ToDoApp = () => {
     setEditingText('')
   }
 
+  function handleKeyDown(e){
+    if(e.key === 'Enter') handleAddTask()
+  }
+
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'))
     if(savedTasks){
@@ -84,8 +90,10 @@ export const ToDoApp = () => {
 
       <input
         type='text'
+        ref={inputRef}
         placeholder='Introduce tarea...'
         value={text}
+        onKeyDown={handleKeyDown}
         onChange={(e) => setText(e.target.value)}
       />
 
